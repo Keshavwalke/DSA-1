@@ -1,6 +1,5 @@
 package arrays;
 //		Given a binary array ( all elements are 0's and 1's) yout are allowed to 
-
 //		perform atmost 1 flip operation on any subarray
 //		return max no of 1's that can be achieved after performing the operation
 
