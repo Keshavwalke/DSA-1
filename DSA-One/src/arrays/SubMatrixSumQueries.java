@@ -15,6 +15,7 @@ package arrays;
 //					 D = [2, 3]
 //					 E = [2, 3]
 
+
 public class SubMatrixSumQueries {
 
 	public static int[] solve(int[][] A, int[] B, int[] C, int[] D, int[] E) {
