@@ -4,61 +4,56 @@ package sorting;
 //		Input 1:-							Output 1:
 //		A = [1, 4, 10, 2, 1, 5]				[1, 1, 2, 4, 5, 10]
 public class MergeSort {
-	public int[] solve(int[] A) {
-		int left = 0;
-		int right = A.length - 1;
-		mergeSort(A, left, right);
-		return A;
-	}
+	 public int[] solve(int[] A) {
+         mergeSort(A,0,A.length-1);
+         return A;
+    }
+    
+    public void mergeSort(int A[], int s, int e){
+        if(s>=e) return ;            //Base case
+        int m=(e+s)/2;
+        mergeSort(A,s,m);            //first half sorted
+        mergeSort(A,m+1,e);         //second half sorted
+        merge(A,s,m,e);             //merged them
+    }
 
-	public static void mergeSort(int[] A, int left, int right) {
 
-		if (left == right) {
-			return;
-		}
-		int mid = (left + right) / 2; // Devide array in two halves
-		mergeSort(A, left, mid); // merge first half
-		mergeSort(A, mid + 1, right); // merge second half
-		merge(A, left, mid, right);
-	}
 
-	public static void merge(int[] A, int left, int mid, int right) {
-		int length = right - left + 1;
-		int[] c = new int[length];
-		int i = left;
-		int j = mid + 1;
-		int k = 0;
+    public void merge(int A[],int s,int m,int e){
+        int One[]=new int[m-s+1];           //created two arrays from 0 to m and m+1 to end
+        int Two[]=new int[e-m];
+        int P=One.length;
+        int Q=Two.length;
 
-		while (i <= mid && j <= right) {
-			if (A[i] < A[j]) {
-				c[k] = A[i];
-				i++;
-				// k++;
-			} else {
-				c[k] = A[j];
-				j++;
-				// k++;
-			}
-			k++;
-		}
-		while (i <= mid) {
-			c[k] = A[i];
-			i++;
-			k++;
-		}
-		while (j <= right) {
-			c[k] = A[j];
-			j++;
-			k++;
-		}
-		for (int m = left; m <= right; m++) {
-			A[m] = c[m - left];
-		}
-	}
+        for(int i=0;i<P;i++){               //filled first array
+            One[i]=A[i+s];
+        }
+        for(int i=0;i<Q;i++){              //filled second array
+            Two[i]=A[i+m+1];
+        }
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+        int p1=0;                   //Using two pointer approach to fill A
+        int p2=0;
+        int p3=s;
 
-	}
+        while(p1<P && p2<Q){
+            if(One[p1]<Two[p2]){            //if first array's element lesser filled to A
+                A[p3]=One[p1];
+                p1++;p3++;
+            }
+            else{
+                A[p3]=Two[p2];          //that means second array's element is lesser
+                p2++;p3++;
+            }
+        }
+        while(p1<P){
+            A[p3]=One[p1];
+            p1++;p3++;
+        }                           //Either of this loop will run
+        while(p2<Q){
+            A[p3]=Two[p2];
+            p2++;p3++;
+        }
+    }
 
 }
